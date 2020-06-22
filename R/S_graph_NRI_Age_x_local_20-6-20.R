@@ -7,7 +7,6 @@ unpaired_mean_diff_NRI<- dabestr::dabest(anova_data, local, NRI,
                                          paired = FALSE)
 
 # Display the results in a user-friendly format.
-unpaired_mean_diff
 quartz()
 plot(unpaired_mean_diff_age)
 plot(unpaired_mean_diff_NRI)

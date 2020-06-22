@@ -29,3 +29,6 @@ biogeo<- Eco #ecoregions of each point in the map
 coords <- read.table("data/coords.txt", sep = ";") #coordinates for all points
 temp_trop<- c(rep("temperate", length(1:2248)), rep("tropical", length(2249:nrow(W)))) #categorizing the coordinates
 
+#### read results ###
+ages<- readRDS(here::here("R", "agesResult.rds"))
+nri<- readRDS(here::here("R", "nriRes.rds"))

@@ -4,6 +4,7 @@
 ####calculating arrival age####
 age_arrival<- diversification.assembly(W= W, tree= tree, ancestral.area= ancestral.area, biogeo= biogeo)
 ages<- age_arrival$age_arrival
+saveRDS(ages, here::here("R", "agesResult.rds"))
 
 #mean age for each assemblage
 mean_age<- apply(ages, 1, function(x) mean(x[which(x != 0)])) #mean arrival age for each assemblage
