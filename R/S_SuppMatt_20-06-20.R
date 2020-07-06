@@ -14,8 +14,9 @@ windows(5,5)
 plot(r.W, xlab = "Longitude", ylab = "Latitude")
 plot(costline, add=T)
 
-#### model plot for supplementary material ####
-####Models for supplementary material 
-curve.nlslrc = nlsLM(NRI ~ a+b/(latitude),
-                     start=list(a=(max(NRI)-min(NRI)),
-                                b=-min(NRI)))
+#### plot for supplementary material ####
+nri_noNA<- nri[!is.na(nri[, 6]), "mpd.obs.z"]
+coords_noNA<- coords[which(!is.na(nri[, 6]) == T),]
+quartz()
+plot(coords_noNA[, 2], nri_noNA, pch= 19, cex= 1, xlab= "Latitude", ylab= "NRI")
+which(coords_noNA[,2] < 0)
