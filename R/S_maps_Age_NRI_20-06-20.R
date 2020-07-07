@@ -26,10 +26,9 @@ age.cells <- 1:ncell(r) %in% cell.r
 values_cell[age.cells] <- mean_age
 r.age <- raster::setValues(r, values = values_cell)
 
-### Figure
-windows(17,9) #for windows
-tiff("Fig3_Ses_Age_06-07.tiff", units = 'in', res = 300)
-quartz() #for mac
+### Figure ####
+#exporting as tif image
+tiff("Fig3_Ses_Age_06-07.tif", units = 'cm', width = 17.4, height = 12, res = 300)
 par(mfrow = c(1,2), mar=c(6,4,4,5))
 plot(r.nri, xlab = "Longitude", ylab = "Latitude")
 plot(costline, add=T)
