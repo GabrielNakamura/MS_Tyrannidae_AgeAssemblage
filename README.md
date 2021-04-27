@@ -18,7 +18,7 @@ In this directory you will find all data and R scripts needed to reproduce the a
 
 To download all the data contained in this repository type:
 
-`download.file(url = "https://github.com/GabrielNakamura/MS_Tyrannidae_ageAssembly/archive/master.zip", destfile = "ProjTyrannidae.zip")`
+`download.file(url = "https://github.com/GabrielNakamura/MS_Tyrannidae_AgeAssemblage/archive/master.zip", destfile = "ProjTyrannidae.zip")`
 
 to unzip the .zip file in your computer type
 
