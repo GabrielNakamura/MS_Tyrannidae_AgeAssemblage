@@ -17,7 +17,7 @@ source(here::here("R", "functions", "anova.1way.R"))
 source(here::here("R", "functions", "GridFilter.R"))
 
 ######read data######
-tree<- read.tree(here::here("data", "tree")) #read tree
+tree<- ape::read.tree(here::here("data", "tree")) #read tree
 W<- as.matrix(read.table(here::here("data", "matrixW.txt"), header= TRUE)) #read community matrix
 ancestral.area<- read.table(here::here("data", "matrixEcoNodes.txt"), header= TRUE) #ancestral area data - from 
 biogeo<- read.table(here::here("data", "matrixEco.txt"), header= TRUE) #ecoregions of each point in the map
