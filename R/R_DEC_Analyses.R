@@ -76,8 +76,9 @@ W_edit <- W_edit[, - match(c("Onychorhynchus_coronatus", "Onychorhynchus_swainso
 W_edit <- cbind(W_edit, Onychorhynchus_coronatus)
 Xolmis_rubetra <- rowSums(W_edit[, match(c("Xolmis_salinarum", "Xolmis_rubetra"), colnames(W_edit))])
 W_edit <- W_edit[, - match(c("Xolmis_salinarum", "Xolmis_rubetra"), colnames(W_edit))]
-W_edit <- cbind(W_edit, Xolmis_rubetra)
+W_edit <- cbind(W_edit, Xolmis_rubetra) 
 colnames(W_edit)[which(is.na(match(colnames(W_edit), tr$tip.label)) == TRUE)] # checking
+W_edit # matriz correta para analise com a arvore de Harvey
 
 # Geography file - PHYLLIP FORMAT
 colnames(presab.sigmodontinae.final)
