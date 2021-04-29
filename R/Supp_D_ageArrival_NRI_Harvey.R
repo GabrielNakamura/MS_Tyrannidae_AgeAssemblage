@@ -1,0 +1,37 @@
+
+# reading data  -----------------------------------------------------------
+tree_harvey <- ape::read.tree(here::here("data", "processed", "Tree_TF400Howard_Pruned.tre"))
+W_harvey <- read.table(here::here("data", "processed", "W_harvey.txt"))
+ancestral.area<- read.table(here::here("data", "processed", "Econodes_harvey.txt"), header= TRUE) #ancestral area data - from 
+biogeo<- read.table(here::here("data", "matrixEco.txt"), header= TRUE) #ecoregions of each point in the map
+
+# reading function --------------------------------------------------------
+source(here::here("R", "functions", "DivB_metrics_18-08-20.R"))
+
+# calculating age arrival -------------------------------------------------
+
+res_age_arrival_Harvey <- diversification.assembly(W = W_harvey, tree = tree_harvey, ancestral.area = ancestral.area, biogeo = biogeo)
+
+ages_harvey <- res_age_arrival_Harvey$age_arrival
+
+saveRDS(ages_harvey, here::here("output", "Supp_agesResult_Harvey.rds"))
+
+mean_age <- apply(ages_harvey, 1, function(x) mean(x[which(x != 0)])) #mean arrival age for each assemblage
+
+
+# calculating NRI ---------------------------------------------------------
+
+dis_harvey <- cophenetic(tree_harvey) #cophenetic distance matrix
+orgn <- SYNCSA::organize.syncsa(comm = W_harvey, phylodist = dis_harvey) #organizing matrices
+nri <- ses.mpd(org$community, org$phylodist, null.model = "taxa.labels", runs = 999) #nri calculation
+ses_mpd_res <- nri$mpd.obs.z
+ses.mpd_res_noNA <- ifelse(!is.na(ses_mpd_res), ses_mpd_res, 0)
+saveRDS(nri, here::here("output", "nriRes_harvey.rds")) #saving nri results
+
+
+# Anova age and NRI -------------------------------------------------------
+
+anova_data<- data.frame(mean_age= mean_age, NRI= nri_res_noNA, local= temp_trop)
+anova_data_ses<- data.frame(mean_age= mean_age, NRI= ses.mpd_res_noNA, local= temp_trop)
+res_anovaAge<- anova.1way(mean_age~temp_trop, data = anova_data_ses, nperm=10000) #anova with age
+res_anovaNRI<- anova.1way(NRI~temp_trop, data = anova_data_ses, nperm=10000) #anova with NRI values
