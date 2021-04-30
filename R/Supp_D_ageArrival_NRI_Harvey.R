@@ -2,8 +2,12 @@
 # reading data  -----------------------------------------------------------
 tree_harvey <- ape::read.tree(here::here("data", "processed", "Tree_TF400Howard_Pruned.tre"))
 W_harvey <- read.table(here::here("data", "processed", "W_harvey.txt"))
-ancestral.area<- read.table(here::here("data", "processed", "Econodes_harvey.txt"), header= TRUE) #ancestral area data - from 
+ancestral.area <- read.table(here::here("data", "processed", "Econodes_harvey.txt"), header= TRUE) #ancestral area data - from 
+ancestral.area <- ancestral.area[, -1]
+ancestral.area <- data.frame(ancestral.area)
 biogeo<- read.table(here::here("data", "matrixEco.txt"), header= TRUE) #ecoregions of each point in the map
+biogeo <- biogeo[, -1]
+biogeo <- data.frame(biogeo)
 
 # reading function --------------------------------------------------------
 source(here::here("R", "functions", "DivB_metrics_18-08-20.R"))
@@ -35,3 +39,7 @@ anova_data<- data.frame(mean_age= mean_age, NRI= nri_res_noNA, local= temp_trop)
 anova_data_ses<- data.frame(mean_age= mean_age, NRI= ses.mpd_res_noNA, local= temp_trop)
 res_anovaAge<- anova.1way(mean_age~temp_trop, data = anova_data_ses, nperm=10000) #anova with age
 res_anovaNRI<- anova.1way(NRI~temp_trop, data = anova_data_ses, nperm=10000) #anova with NRI values
+
+
+anova_data<- data.frame(mean_age= mean_age, local= temp_trop)
+res_anovaAge<- anova.1way(mean_age ~ temp_trop, data = anova_data, nperm = 10000) #anova with age

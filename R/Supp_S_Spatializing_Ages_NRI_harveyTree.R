@@ -26,7 +26,7 @@ cell.r <- cellFromXY(r, coords[names(nri_harvey),])
 values_cell <- rep(NA, ncell(r))
 names(values_cell) <- 1:ncell(r)
 nri.cells <- 1:ncell(r) %in% cell.r
-values_cell[nri.cells] <- nri
+values_cell[nri.cells] <- ses.mpd_res_noNA
 r.nri <- raster::setValues(r, values = values_cell)
 
 
@@ -41,13 +41,15 @@ r.age <- raster::setValues(r, values = values_cell)
 
 
 # generating and exporting figures ----------------------------------------
-
-tiff("Fig3_Ses_Age_06-07.tif", units = 'cm', width = 17.4, height = 12, res = 300)
-par(mfrow = c(1,2), mar=c(6,4,4,5))
-plot(r.nri, xlab = "Longitude", ylab = "Latitude")
-plot(costline, add=T)
-mtext("a",side = 3, line = 0.5, font = 2, adj = 0, cex = 1.5)
+data_saving <- date()
+data_edit <- unlist(strsplit(data_saving, split = " "))[c(1, 2, 3, 5)]
+name_plot <- paste("Supp_AgeArrival_HarveyTree", 
+                   data_edit[1],
+                   data_edit[2], 
+                   data_edit[3],
+                   data_edit[4],
+                   sep = "_")
+tiff(filename = here::here("Figures", paste(name_plot, "tif", sep = ".")), units = 'cm', width = 17.4, height = 12, res = 300)
 plot(r.age, xlab = "Longitude", ylab = "Latitude")
 plot(costline, add=T)
-mtext("b",side = 3, line = 0.5, font = 2, adj = 0, cex = 1.5)
 dev.off()
