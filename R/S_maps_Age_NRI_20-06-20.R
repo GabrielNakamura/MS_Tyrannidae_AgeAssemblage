@@ -6,7 +6,7 @@ library(rnaturalearthdata)
 costline <- coastline50
 ages <- mean_age
 nri<- ses.mpd_res_noNA
-names(nri)<- names(ages)
+names(nri)<- names(mean_age)
 rownames(coords)<- 1:5567
 r <- raster(vals=NA, xmn = -170.2166 , xmx = -13.21288, ymn = -55.37714, ymx = 83.6236, resolution=1.0)
 

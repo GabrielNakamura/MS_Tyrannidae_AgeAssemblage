@@ -34,13 +34,12 @@ saveRDS(nri, here::here("output", "nriRes_harvey.rds")) #saving nri results
 
 
 # Anova age and NRI -------------------------------------------------------
-
-anova_data_ses <- data.frame(mean_age= mean_age, NRI= -1*ses.mpd_res_noNA, local= temp_trop, coords = coords[age.cells, ])
+coords_filter <- coords[match(names(mean_age), rownames(coords)), ]
+anova_data_ses <- data.frame(mean_age= mean_age, NRI= -1*ses.mpd_res_noNA, local= temp_trop, coords = coords_filter)
 res_anovaAge <- anova.1way(mean_age ~ temp_trop, data = anova_data_ses, nperm = 10000) #anova with age
 res_anovaNRI <- anova.1way(NRI ~ temp_trop, data = anova_data_ses, nperm = 10000) #anova with NRI values
 
 # saving processed data ---------------------------------------------------
 
 write.csv(x = anova_data_ses, here::here("data", "processed", "anova_tableNRI_Age_Harvey.csv"))
-
 
