@@ -2,7 +2,7 @@
 
 
 # reading libraries and data ----------------------------------------------
-ages_harvey <- readRDS(here::here("output", "Supp_agesResult_Harvey.rds"))
+ages_harvey <- readRDS(here::here("output", "agesResult_Harvey.rds"))
 nri_harvey <- readRDS(here::here("output", "nriRes_harvey.rds"))
 
 mean_age <- apply(ages_harvey, 1, function(x) mean(x[which(x != 0)])) #mean arrival age for each assemblage
@@ -49,7 +49,8 @@ name_plot <- paste("Fig3_Ses_Age",
                    data_edit[3],
                    data_edit[4],
                    sep = "_")
-tiff(filename = here::here("Figures", paste(name_plot, "tif", sep = ".")), units = 'cm', width = 25.4, height = 12, res = 300)
+tiff(filename = here::here("Figures", paste(name_plot, "tif", sep = ".")), units = 'cm', width = 25.4, height = 12, res = 500)
+quartz()
 par(mfrow = c(1,2), mar=c(6,4,4,5))
 plot(r.nri, xlab = "Longitude", ylab = "Latitude")
 plot(costline, add=T)

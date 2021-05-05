@@ -29,7 +29,7 @@ biogeo <- data.frame(biogeo)
 Eco<- read.table(here::here("data", "matrixEco.txt"),header=TRUE) 
 tree <- ape::read.tree(here::here("data", "processed", "Tree_TF400Howard_Pruned.tre")) #read tree
 coords <- read.table("data/coords.txt", sep = ";") #coordinates for all points
-temp_trop<- c(rep("temperate", length(1:2248)), rep("tropical", length(2249:nrow(W)))) #categorizing the coordinates
+temp_trop<- c(rep("temperate", length(1:2248)), rep("tropical", length(2249:nrow(W_harvey)))) #categorizing the coordinates
 
 # read results NRI and Ages -----------------------------------------------
 
